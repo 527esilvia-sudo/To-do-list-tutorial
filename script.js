@@ -46,14 +46,43 @@ function displayTasks() {
                                 </div><button class='btn btn-success btn-sm' onclick='removeTask(${index})'>✔</button>`
         //append the new task list to the html
         taskList.appendChild(li)
+        li.querySelectorAll('.dropdown-item').forEach(item => {
+    item.addEventListener('click', function () {
+        li.querySelector('.dropdown').innerHTML = this.textContent
+    })
+})
 
     })
 }
-document.getElementById('dropdown-item').addEventListener('click', function () {
- items.forEach(item => {
-    $("dropdown-item").replaceWith("textContent.li");
- })
-})
+function filterTasks(goal) {
+
+    let filteredTasks = []
+
+    if (goal === "All") {
+        filteredTasks = tasks
+    }
+
+    if (goal === "1-3 Days") {
+        filteredTasks = tasks.filter(function(task) {
+            return task.includes("1-3 Days")
+        })
+    }
+
+    if (goal === "1 week") {
+        filteredTasks = tasks.filter(function(task) {
+            return task.includes("1 week")
+        })
+    }
+
+    if (goal === "Longer than a week") {
+        filteredTasks = tasks.filter(function(task) {
+            return task.includes("Longer than a week")
+        })
+    }
+
+    displayTasks(filteredTasks)
+}
+
 
 function removeTask(index) {
     tasks.splice(index, 1)
@@ -63,5 +92,11 @@ function removeTask(index) {
 document.getElementById('clearTaskBtn').addEventListener('click', function () {
     tasks = []
     displayTasks()
+})
+
+document.getElementById('taskInput').addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+        document.getElementById('addTaskBtn').click()
+    }
 })
 
