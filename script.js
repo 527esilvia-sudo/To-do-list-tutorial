@@ -1,26 +1,37 @@
 
-
 let tasks = [] // empty array to store tasks
+let priorities = [] // empty array to store priorities
 
-document.getElementById('addTaskBtn').addEventListener('click', function () {
-    //get the value from input field
+document.getElementById('addTaskBtn').addEventListener('click', function() {
+   let priority = document.getElementById('priority').value
     let taskInput = document.getElementById('taskInput').value
     //check if input is empty
     if (taskInput) {
-        //add new task to task array
+      if (!priority) {
+            alert("Please select a priority before adding a task!")
+            return
+        }
         tasks.push(taskInput)
-        //clear input field value
-        document.getElementById('taskInput').value = ''
-        //update task list display
+    //clear input field value
+        document.getElementById('taskInput').value= ''
+    //update task list display
         displayTasks()
     }
 })
+// function addDropdown() {
 
+
+    
+
+
+// }
 function displayTasks() {
     // select our tasklist in the html
     let taskList = document.getElementById('taskList')
     // clear the existing html list
     taskList.innerHTML = ''
+    let dropdown = document.getElementById("priority");
+
     //loop through each task in the array and create a list item for each
     tasks.forEach((task, index) => {
         //create <li> element for each task
@@ -47,41 +58,41 @@ function displayTasks() {
         //append the new task list to the html
         taskList.appendChild(li)
         li.querySelectorAll('.dropdown-item').forEach(item => {
-    item.addEventListener('click', function () {
-        li.querySelector('.dropdown').innerHTML = this.textContent
-    })
-})
+            item.addEventListener('click', function () {
+                li.querySelector('.dropdown').innerHTML = this.textContent
+            })
+        })
 
     })
 }
-function filterTasks(goal) {
+// function filterTasks(goal) {
 
-    let filteredTasks = []
+//     let filteredTasks = []
 
-    if (goal === "All") {
-        filteredTasks = tasks
-    }
+//     if (goal === "All") {
+//         filteredTasks = tasks
+//     }
 
-    if (goal === "1-3 Days") {
-        filteredTasks = tasks.filter(function(task) {
-            return task.includes("1-3 Days")
-        })
-    }
+//     if (goal === "1-3 Days") {
+//         filteredTasks = tasks.filter(function(task) {
+//             return task.includes("1-3 Days")
+//         })
+//     }
 
-    if (goal === "1 week") {
-        filteredTasks = tasks.filter(function(task) {
-            return task.includes("1 week")
-        })
-    }
+//     if (goal === "1 week") {
+//         filteredTasks = tasks.filter(function(task) {
+//             return task.includes("1 week")
+//         })
+//     }
 
-    if (goal === "Longer than a week") {
-        filteredTasks = tasks.filter(function(task) {
-            return task.includes("Longer than a week")
-        })
-    }
+//     if (goal === "Longer than a week") {
+//         filteredTasks = tasks.filter(function(task) {
+//             return task.includes("Longer than a week")
+//         })
+//     }
 
-    displayTasks(filteredTasks)
-}
+//     displayTasks(filteredTasks)
+// }
 
 
 function removeTask(index) {
