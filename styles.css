@@ -255,3 +255,16 @@ main {
     text-align: center;
     font-style: italic;
 }
+.d-flex.justify-content-between.align-items-center span.completed {
+    color: green !important;
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+.completed-box {
+    background-color: #e0e0e0;
+}
+.task-text {
+    font-size: 1.25rem;
+    font-weight: 500;
+    font: size 900px;
+}

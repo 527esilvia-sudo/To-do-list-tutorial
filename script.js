@@ -1,9 +1,10 @@
-let tasks = [] // empty array to store tasks
-let priorities = [] // empty array to store priorities
-let lowTaskCounter = 0 // counter for low priority tasks
-let mediumTaskCounter = 0 // counter for medium priority tasks
-let highTaskCounter = 0 // counter for high priority tasks
-let completed = false // flag to track if a task is completed
+let tasks = [] // store tasks
+let priorities = [] // store priorities
+let completedTasks = [] // store completed state
+
+let lowTaskCounter = 0
+let mediumTaskCounter = 0
+let highTaskCounter = 0
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -14,8 +15,8 @@ document.addEventListener('DOMContentLoaded', function () {
         let priority = document.getElementById('priority').value
         let taskInput = document.getElementById('taskInput').value
 
-        //check if input is empty
         if (taskInput) {
+
             if (!priority) {
                 warning.textContent = 'Please select a priority level'
                 return
@@ -25,21 +26,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
             tasks.push(taskInput)
             priorities.push(priority)
+            completedTasks.push(false)
 
-            //clear input field value
             document.getElementById('taskInput').value = ''
 
-            //update task list display
             sortTasks()
         }
     })
 
-
-
-
     document.getElementById('clearTaskBtn').addEventListener('click', function () {
         tasks = []
         priorities = []
+        completedTasks = []
         sortTasks()
     })
 
@@ -48,65 +46,75 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('addTaskBtn').click()
         }
     })
-
 })
 
 function removeTask(index) {
     tasks.splice(index, 1)
     priorities.splice(index, 1)
+    completedTasks.splice(index, 1)
     sortTasks()
 }
+
+/* toggle completed state */
+function completeTask(button) {
+    const index = button.getAttribute('data-index')
+    completedTasks[index] = !completedTasks[index]
+    sortTasks()
+}
+
 function sortTasks() {
+
     const highSection = document.getElementById('highSection')
     const mediumSection = document.getElementById('mediumSection')
     const lowSection = document.getElementById('lowSection')
+
     highTaskCounter = 0
     mediumTaskCounter = 0
     lowTaskCounter = 0
 
-
-    //clear existing tasks
     highSection.innerHTML = ''
     mediumSection.innerHTML = ''
     lowSection.innerHTML = ''
 
-    //loop through tasks and sort by priority
     tasks.forEach((task, index) => {
 
+        let completedClass = completedTasks[index] ? 'completed' : ''
+        let completedBox = completedTasks[index] ? 'completed-box' : ''
 
         if (priorities[index] === 'High') {
             highTaskCounter++
+
             highSection.innerHTML += `
-                <div class="d-flex justify-content-between align-items-center mb-2 p-2 border rounded">
-                    <span>${task}</span>
-                    <button class='btn btn-success btn-sm' onclick='removeTask(${index})'>✔</button>
+                <div class="d-flex justify-content-between align-items-center mb-2 p-2 border rounded ${completedBox}">
+                    <span class="task-text ${completedClass}">${task}</span>
+                    <button class='btn btn-success btn-sm' data-index='${index}' onclick='completeTask(this)'>✔</button>
                 </div>
-                        `
+            `
         }
 
         else if (priorities[index] === 'Medium') {
             mediumTaskCounter++
+
             mediumSection.innerHTML += `
-                    <div class="d-flex justify-content-between align-items-center mb-2 p-2 border rounded">
-                        <span>${task}</span>
-                        <button class='btn btn-success btn-sm' onclick='completeTask(${index})'>✔</button>
-                    </div>
-                            `
+                <div class="d-flex justify-content-between align-items-center mb-2 p-2 border rounded ${completedBox}">
+                    <span class="task-text ${completedClass}">${task}</span>
+                    <button class='btn btn-success btn-sm' data-index='${index}' onclick='completeTask(this)'>✔</button>
+                </div>
+            `
         }
 
         else if (priorities[index] === 'Low') {
             lowTaskCounter++
+
             lowSection.innerHTML += `
-                <div class="d-flex justify-content-between align-items-center mb-2 p-2 border rounded">
-                    <span>${task}</span>
-                    <button class='btn btn-success btn-sm' onclick='completeTask(${index})'>✔</button>
+                <div class="d-flex justify-content-between align-items-center mb-2 p-2 border rounded ${completedBox}">
+                    <span class="task-text ${completedClass}">${task}</span>
+                    <button class='btn btn-success btn-sm' data-index='${index}' onclick='completeTask(this)'>✔</button>
                 </div>
-                        `
+            `
         }
     })
-    function completeTask(index){
 
-    }
     document.getElementById("highTask").innerHTML =
         "Tasks Left: " + highTaskCounter
 
