@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
             completedTasks.push(false)
 
             document.getElementById('taskInput').value = ''
+            document.getElementById('priority').value = ''
 
             sortTasks()
         }
