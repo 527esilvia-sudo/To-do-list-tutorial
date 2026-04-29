@@ -1,91 +1,71 @@
-/* ================================
-   GLOBAL BACKGROUND
-================================ */
 
 body {
     min-height: 100vh;
     margin: 0;
-    font-family: 'Rubik', 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: radial-gradient(circle at 12% 12%, rgba(94, 215, 255, 0.18), transparent 16%),
-        radial-gradient(circle at 82% 16%, rgba(255, 85, 165, 0.16), transparent 16%),
-        radial-gradient(circle at 18% 86%, rgba(146, 255, 181, 0.14), transparent 16%),
-        linear-gradient(180deg, #06182f 0%, #0b2c6a 30%, #0f4c9b 58%, #0c275a 100%);
-    color: #eef7ff;
-    overflow-x: hidden;
+    font-family: 'Rubik', 'Poppins', system-ui, sans-serif;
+
+    background:
+        radial-gradient(circle at 18% 12%, rgba(255, 190, 220, .55), transparent 50%),
+        radial-gradient(circle at 82% 18%, rgba(190, 220, 255, .55), transparent 50%),
+        radial-gradient(circle at 40% 88%, rgba(190, 255, 225, .45), transparent 55%),
+        radial-gradient(circle at 70% 75%, rgba(210, 200, 255, .35), transparent 55%),
+        linear-gradient(180deg, #f6f3ff 0%, #faf7ff 40%, #eef6ff 100%);
+
+    color: #1c2b45;
+    animation: fadeIn 0.6s ease;
 }
 
-body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    background: radial-gradient(circle at 12% 10%, rgba(255, 170, 105, 0.12), transparent 14%),
-        radial-gradient(circle at 70% 12%, rgba(113, 255, 200, 0.12), transparent 14%),
-        radial-gradient(circle at 55% 72%, rgba(151, 102, 255, 0.10), transparent 14%);
-}
+
 
 /* ================================
-   LAYOUT
+   TITLE
 ================================ */
-
-main {
-    min-height: 100vh;
-}
-
-.page-shell {
-    position: relative;
-    padding-top: 2rem;
-}
-
-/* ================================
-   TOP PANEL
-================================ */
-
-.top-panel {
-    position: relative;
-    padding: 2rem 1rem 3rem;
-}
 
 .app-title {
-    font-size: clamp(3rem, 5vw, 4.6rem);
+    font-size: clamp(3rem, 5vw, 4.5rem);
     font-weight: 900;
-    letter-spacing: -0.08em;
+    letter-spacing: -0.06em;
     text-transform: uppercase;
-    text-shadow: 0 10px 30px rgba(19, 35, 86, 0.25);
+    color: #2a3550;
+    animation: slideDown 0.6s ease;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 /* ================================
-   INPUTS + DROPDOWN FIX
+   INPUTS
 ================================ */
 
 .form-control,
 .form-select {
-    border-radius: 18px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.95), rgba(230, 245, 255, 0.92));
-    color: #0f3559;
-    min-height: 3.8rem;
-    padding: 1rem 1.25rem;
-    box-shadow: inset 0 16px 28px rgba(68, 106, 186, 0.12);
-    display: flex;
-    align-items: center;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, .15);
+    background: rgba(255, 255, 255, .95);
+    color: #1c2b45;
+    min-height: 3.6rem;
+    padding: 1rem 1.2rem;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, .08);
+    transition: box-shadow .25s ease, border-color .25s ease;
 }
 
 .form-control:focus,
 .form-select:focus {
-    border-color: #8accff;
-    box-shadow: 0 0 0 0.22rem rgba(110, 179, 255, 0.24);
+    border-color: #8FB7FF;
+    box-shadow: 0 0 0 .2rem rgba(150, 180, 255, .35);
     outline: none;
 }
 
-/* fixes dropdown alignment */
-.button-row {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-}
-
+/* dropdown arrow */
 .priority-select-wrapper {
     position: relative;
 }
@@ -95,153 +75,225 @@ main {
     right: 1rem;
     top: 50%;
     transform: translateY(-50%);
-    pointer-events: none;
-    color: #315487;
+    color: #4a5f7a;
 }
 
 /* ================================
-   BUTTONS (RESTORED FULL STYLE)
+   WARNING
+================================ */
+
+.warning {
+    min-height: 35px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #ff5f5f;
+    margin-bottom: 1rem;
+    animation: pulseWarning 0.4s ease;
+}
+
+@keyframes pulseWarning {
+    from {
+        opacity: 0;
+        transform: scale(.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ================================
+   BUTTONS — PASTEL POP + MICRO ANIMATIONS
 ================================ */
 
 .btn-bubbly {
-    border: 1px solid rgba(255, 255, 255, 0.16);
+    border: none;
     border-radius: 999px;
-    padding: 1rem 1.8rem;
-    font-weight: 900;
+    padding: 1rem 2rem;
+    font-weight: 800;
+    letter-spacing: .05em;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
-    box-shadow: 0 26px 68px rgba(28, 100, 245, 0.28),
-        inset 0 -2px 0 rgba(255, 255, 255, 0.12);
-    transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
-    position: relative;
-    overflow: hidden;
+    transition: background-color .25s ease, transform .25s ease, box-shadow .25s ease;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, .12);
+    cursor: pointer;
 }
 
-.btn-bubbly:hover {
-    transform: translateY(-3px);
-    filter: brightness(1.08);
-}
-
+/* Pastel bases */
 .btn-add {
-    color: #ffffff;
-    background: linear-gradient(135deg, #38e0ff 0%, #1c63ff 40%, #86f6ff 100%);
+    background: #9EC9FF;
+    /* lighter sky blue */
+    color: #0f1a2e;
 }
 
 .btn-clear {
-    color: #19102f;
-    background: linear-gradient(135deg, #ffd66b 0%, #ff978a 40%, #ff53df 100%);
+    background: #FFB3C7;
+    /* lighter blush */
+    color: #0f1a2e;
+}
+
+/* Hover = brighten (v4 behavior) */
+.btn-add:hover {
+    background: #B3D7FF;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, .18);
+}
+
+.btn-clear:hover {
+    background: #FFC4D4;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, .18);
+}
+
+/* Click animation */
+.btn-bubbly:active {
+    transform: scale(.96);
 }
 
 /* ================================
-   TASK ROWS (UNCHANGED STYLE)
+   CHECKMARK BUTTON (task complete)
 ================================ */
 
-.d-flex.justify-content-between.align-items-center.mb-2.p-2.border.rounded {
-    background: rgba(12, 35, 85, 0.75);
-    border: 1px solid rgba(120, 180, 255, 0.25) !important;
-    border-radius: 16px !important;
-    color: #f5fbff;
+.complete-btn {
+    background: #A8F2D4;
+    /* mint */
+    border: none;
+    color: #0f1a2e;
+    border-radius: 10px;
+    padding: .4rem .7rem;
+    font-weight: 700;
+    transition: background-color .25s ease, transform .25s ease;
 }
 
-.d-flex.justify-content-between.align-items-center span {
-    color: #ffffff;
+.complete-btn:hover {
+    background: #B8F7DD;
+    transform: scale(1.08);
 }
 
-.d-flex.justify-content-between.align-items-center button {
-    margin-left: 1rem;
+.complete-btn:active {
+    transform: scale(.95);
 }
 
 /* ================================
-   ACCORDION BASE
+   ACCORDION PANELS — LIGHTER GRADIENT MIX
 ================================ */
-
-.priority-accordion {
-    margin-top: 1rem;
-}
 
 .priority-panel {
-    border-radius: 1.6rem;
+    border-radius: 1.5rem;
     overflow: hidden;
-    box-shadow: 0 20px 48px rgba(2, 15, 45, 0.18);
+    margin-bottom: 1rem;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, .12);
+    transition: transform .25s ease, filter .25s ease;
 }
 
-/* ================================
-   HIGH / MED / LOW BANNERS (RESTORED)
-================================ */
-
+/* Mixed pastel gradients */
 .priority-panel.high-panel {
-    background: linear-gradient(165deg, rgba(49, 122, 255, 0.9), rgba(86, 190, 255, 0.2));
+    background: linear-gradient(135deg, #C7B8FF, #AFCFFF, #9EC9FF);
 }
 
 .priority-panel.medium-panel {
-    background: linear-gradient(165deg, rgba(255, 180, 90, 0.92), rgba(255, 110, 155, 0.18));
+    background: linear-gradient(135deg, #FFD6A5, #FFB3C7, #FF9EC8);
 }
 
 .priority-panel.low-panel {
-    background: linear-gradient(165deg, rgba(90, 255, 189, 0.88), rgba(80, 135, 255, 0.18));
+    background: linear-gradient(135deg, #B8F7D4, #A8F2D4, #AFCFFF);
 }
 
-/* subtle glow overlay */
-.priority-panel::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    opacity: 0.16;
-    pointer-events: none;
+/* Hover = brighten slightly (v4 behavior) */
+.priority-panel:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.06);
 }
 
 /* ================================
-   ACCORDION HEADER (FIXED BUT ORIGINAL LOOK)
+   ACCORDION HEADER — PERFECT ALIGNMENT
 ================================ */
 
 .accordion-button {
-    background: rgba(9, 22, 58, 0.96);
-    color: #f8fcff;
-    padding: 1rem 1.4rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    transition: 180ms ease;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 100%;
+    padding: 1rem 1.2rem;
+
+    background: rgba(255, 255, 255, .3);
+    color: #0f1a2e;
+    font-weight: 700;
+
+    transition: background-color .25s ease, color .25s ease;
 }
 
-.accordion-button:hover {
-    background: linear-gradient(135deg, rgba(91, 205, 255, 0.18), rgba(44, 106, 248, 0.96));
-    transform: translateY(-1px);
+/* FIX: perfect alignment across all headers */
+.accordion-button span:first-child {
+    flex-basis: 60%;
+    /* title column */
 }
 
+.panel-label {
+    flex-basis: 40%;
+    /* counter column */
+    text-align: right;
+    font-weight: 800;
+    font-size: 1rem;
+    opacity: .95;
+}
+
+/* Open state */
 .accordion-button:not(.collapsed) {
-    background: linear-gradient(135deg, rgba(255, 245, 160, 0.18), rgba(68, 122, 255, 0.95));
+    background: rgba(255, 255, 255, .45);
+    color: #0a1324;
+}
+
+/* remove Bootstrap focus glow */
+.accordion-button:focus {
+    box-shadow: none;
 }
 
 /* ================================
-   ACCORDION BODY
+   ACCORDION BODY — TINTED
 ================================ */
 
 .accordion-body {
-    background: linear-gradient(180deg, rgba(3, 17, 47, 0.98), rgba(7, 23, 68, 0.95));
-    padding: 4rem 5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, .55);
+    padding: 1rem;
+    border-radius: 0 0 1.5rem 1.5rem;
+    animation: fadeIn .4s ease;
 }
 
 /* ================================
-   LIST ITEMS
+   TASK ITEMS
 ================================ */
 
-.priority-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+.d-flex.justify-content-between.align-items-center.mb-2.p-2.border.rounded {
+    background: rgba(255, 255, 255, .75);
+    border: 1px solid rgba(0, 0, 0, .1) !important;
+    border-radius: 14px !important;
+    padding: 1rem !important;
+    color: #1c2b45;
+    transition: transform .2s ease, background-color .2s ease;
 }
 
-.priority-list li {
-    background: linear-gradient(135deg, rgba(18, 58, 151, 0.96), rgba(10, 31, 95, 0.94));
-    border: 1px solid rgba(115, 188, 255, 0.24);
-    border-radius: 18px;
-    padding: 1rem 1.1rem;
-    margin-bottom: 0.95rem;
-    color: #f1f8ff;
+/* hover for task rows */
+.d-flex.justify-content-between.align-items-center.mb-2.p-2.border.rounded:hover {
+    background: rgba(255, 255, 255, .95);
+    transform: translateY(-2px);
+}
+
+/* task text */
+.task-text {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+/* completed tasks */
+.completed-box {
+    background: rgba(140, 220, 170, .55) !important;
+}
+
+span.completed {
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+    text-decoration-color: rgba(255, 255, 255, .95);
+    color: #ffffff;
+    opacity: 1;
 }
 
 /* ================================
@@ -249,26 +301,12 @@ main {
 ================================ */
 
 .empty-message {
-    padding: 1.3rem 1rem;
-    border-radius: 20px;
-    background: rgba(21, 39, 83, 0.78);
-    border: 1px dashed rgba(156, 231, 255, 0.36);
-    color: #c5e4ff;
+    padding: 1rem;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, .65);
+    border: 1px dashed rgba(0, 0, 0, .15);
+    color: #4a5f7a;
     text-align: center;
     font-style: italic;
-}
-.completed-box {
-    background: rgba(0, 100, 0, 0.5) !important;
-}
-.d-flex.justify-content-between.align-items-center span.completed {
-    text-decoration: line-through;
-    opacity: 0.6;
-}
-.panel-label {
-    margin-left: auto;
-}
-.task-text {
-    font-size: 1.25rem;
-    font-weight: 500;
-    font: size 900px;
+    animation: fadeIn .4s ease;
 }
