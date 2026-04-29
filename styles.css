@@ -202,6 +202,8 @@ main {
     transition: 180ms ease;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .accordion-button:hover {
@@ -219,7 +221,7 @@ main {
 
 .accordion-body {
     background: linear-gradient(180deg, rgba(3, 17, 47, 0.98), rgba(7, 23, 68, 0.95));
-    padding: 1.4rem 1.25rem;
+    padding: 4rem 5rem;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -255,13 +257,15 @@ main {
     text-align: center;
     font-style: italic;
 }
+.completed-box {
+    background: rgba(0, 100, 0, 0.5) !important;
+}
 .d-flex.justify-content-between.align-items-center span.completed {
-    color: green !important;
     text-decoration: line-through;
     opacity: 0.6;
 }
-.completed-box {
-    background-color: #e0e0e0;
+.panel-label {
+    margin-left: auto;
 }
 .task-text {
     font-size: 1.25rem;
